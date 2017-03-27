@@ -1,4 +1,11 @@
 var code;
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete' && tab.active) {
+    // do your things
+        chrome.cookies.remove({"url":"https://.intentmedia.net", "name":"chromeExtension"});
+  }
+});
+
 var filter = {urls: ["*://*.intentmedia.net/*"]};
 var urlValidate = chrome.extension.getURL("validator.js");
 var opt_extraInfoSpec = ["requestBody"];

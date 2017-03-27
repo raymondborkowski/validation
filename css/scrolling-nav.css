@@ -5,7 +5,22 @@ img.goodImage {
   }
 .arrow {
     text-align: center;
-    margin: 8% 50%;
+    margin: 8% 48%;
+}
+div#cookieSet {
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 20px;
+}
+div#validationHomeText {
+    margin-bottom: -100px;
+    padding-top: 25px;
+    margin-top: 50px;
+    font-size: 20px;
+    padding-bottom: 25px;
+}
+#homePageNew {
+  display: none;
 }
 .bounce {
   -moz-animation: bounce 2s infinite;
@@ -26,6 +41,9 @@ img.goodImage {
     transform: translateY(-15px);
   }
 }
+img#myImage {
+    margin: 15%;
+}
 .header {
     position: relative;
     min-height: 150px;
@@ -35,6 +53,17 @@ img.goodImage {
     bottom: 0;
     left: 0;
   }
+.navbar-default .navbar-brand {
+    color: #0088b1;
+    font-weight: bolder;
+    font-size: 19px;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #5e5e5e;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}
 body {
     width: 800px;
     height: 100%;
@@ -69,28 +98,31 @@ The padding is very important to make sure the scrollspy picks up the right area
 of those sections to manage the look and feel of the site. */
 
 .intro-section {
-    height: 100%;
+    min-height: 100%;
     padding-top: 10%;
     text-align: center;
     background: #fff;
 }
 
 .about-section {
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     padding-top: 5%;
     text-align: center;
     background: #eee;
 }
 
 .services-section {
-    height: 100%;
+    height: auto;
+    min-height: 100%;    
     padding-top: 5%;
     text-align: center;
-    background: #fff;
+    background: rgba(201, 193, 193, 0.7);
 }
 
 .contact-section {
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     padding-top: 5%;
     text-align: center;
     background: #eee;

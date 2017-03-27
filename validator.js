@@ -1,6 +1,7 @@
 
 window._IntentMediaValidator = (function() {
     window.rv = {};
+    console.log("I inserted validator.js");
     function toObject(arr) {
       for (var i = 0; i < arr.length; ++i)
         rv[i] = arr[i];
