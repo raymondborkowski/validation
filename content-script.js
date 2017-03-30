@@ -1,6 +1,4 @@
 //Insert myFunc onto page
-
-
 // Event listener to get data back from myFunc which was inserted on page
 document.addEventListener('SetIt', function(e) {
 	//chrome.storage.local.clear();

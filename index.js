@@ -1,5 +1,10 @@
 // Pure JS:
-
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete' && tab.active) {
+    // do your things
+        chrome.cookies.remove({"url":"https://.intentmedia.net", "name":"chromeExtension"});
+  }
+})
 
 
 

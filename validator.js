@@ -1,7 +1,12 @@
 
 window._IntentMediaValidator = (function() {
+  var r = document.createElement("p");
+  r.id = 'IntentMediaValidator';
+  var p = document.createElement("p");
+  r.style.cssText = 'background-color: rgba(45, 47, 45, 0.9);text-align: center;padding:50px;font-size: 15px;position: absolute;top: 0;left: 0;width: 100%;height: 100%;line-height: 23px;color: white;z-index: 9999999999;';
+  p.style.cssText = 'width: 40%;margin: 0 auto;border-radius: 50px;background: white;padding: 50px;color: black;';
+
     window.rv = {};
-    console.log("I inserted validator.js");
     function toObject(arr) {
       for (var i = 0; i < arr.length; ++i)
         rv[i] = arr[i];
@@ -420,29 +425,48 @@ window._IntentMediaValidator = (function() {
       toObject(log);
 
         if(log.length > 1) {
+          p.innerHTML = '<p id="IM_IM_close" style="top:-30px;right:-30px;cursor:pointer;float:right;font-size:15px;position:relative;">CLOSE X</p>';
+          p.innerHTML += '<img class="titleImage" style="width: 50%;display: block;margin: 0 25%;margin-bottom: -40px;margin-top: -60px;" src = "https://d0.awsstatic.com/logos/customers/intent_blue_on_transparent.png">';
             console.group('Intent Media');
             for(var i = 0; i < log.length; i++) {
+              p.innerHTML += '<br><br><b>'+ log[i].type + ' on page' + (window.IntentMediaProperties.page_id ? (' ' + window.IntentMediaProperties.page_id) + '</b><br>' : '') + ' ' + log[i].name + '';
                 console.groupCollapsed('['+ log[i].type + ' on Page' + (window.IntentMediaProperties.page_id ? (' ' + window.IntentMediaProperties.page_id) : '') + '] ' + log[i].name);
-                if(log[i].type === 'Incorrect Parameter') {
+                if(log[i].type === 'Incorrect Parameter') { 
+                  p.innerHTML += '<br>Your value: ' + log[i].value;
+                  p.innerHTML += '<br>Expected: ' + log[i].msg;
                     console.log('Your value: ' + log[i].value);
                     console.log('Expected: ' + log[i].msg);
                 }else if(log[i].type === 'Missing Parameter') {
+                    p.innerHTML += '<br>Expected: ' + log[i].msg;
                     console.log('Expected: ' + log[i].msg);
                 } else {
+                    p.innerHTML += '<br>Message: ' + log[i].msg;
                     console.log('Message: ' + log[i].msg);
                 }
                 console.groupEnd();
             }
             console.groupEnd();
+  document.body.insertBefore(r, document.body.firstChild);
+    r.appendChild(p);
         } else {
             console.group('Intent Media');
             console.groupCollapsed('['+ log[0].type + ' on Page' + (window.IntentMediaProperties.page_id ? (' ' + window.IntentMediaProperties.page_id) : '') + '] ' + log[0].name);
             console.log('Message: ' + log[0].msg);
             console.groupEnd();
+             p.innerHTML = '<p id="IM_IM_close" style="top:-30px;right:-30px;cursor:pointer;float:right;font-size:15px;position:relative;">CLOSE X</p>';
+            p.innerHTML += '<img class="titleImage" style="width: 50%;display: block;margin: 0 25%;margin-bottom: -40px;margin-top: -60px;" src = "https://d0.awsstatic.com/logos/customers/intent_blue_on_transparent.png">';
+            p.innerHTML += '<h1 style="padding-top:50px;">No Errors!</h1>';
             console.log('No errors!');
             console.groupEnd();
+              document.body.insertBefore(p, document.body.firstChild);
+  document.body.insertBefore(r, document.body.firstChild);
+  r.appendChild(p);
         }
         log = [];
+            document.getElementById('IntentMediaValidator').style.display = 'block';
+            document.getElementById('IM_IM_close').addEventListener('click', function () {
+                document.getElementById('IntentMediaValidator').style.display = 'none';
+            });
     }
 
     function checkSite() {
@@ -614,7 +638,6 @@ window._IntentMediaValidator = (function() {
         var msg = "[Intent Media] Please click the option to stay on page and check the console for output"; 
 
         e.returnValue = msg; 
-
         return msg;
     }
 
@@ -652,7 +675,7 @@ window._IntentMediaValidator = (function() {
     function validateHomePage(e) {
         window.rv = {};
         loadConfig(e.target.response);
-        log.push({"type": "[Items Checked]", "name": "window.IntentMediaProperties, Exit Unit blank page (if applicable), Search Form Compare (if applicable), IntentMedia.trigger", "value": "", "msg": "The above items were checked. Any errors found are listed below."});
+        log.push({"type": "Items Checked", "name": "window.IntentMediaProperties, Exit Unit blank page (if applicable), Search Form Compare (if applicable), IntentMedia.trigger", "value": "", "msg": "The above items were checked. Any errors found are listed below."});
         console.info("[Intent Media] Please run a search and check console for output");
         verifySiteAndPage();
         primeTrigger();
